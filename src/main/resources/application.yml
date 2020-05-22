@@ -1,0 +1,19 @@
+server:
+  port: 9001
+spring:
+  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://localhost:3306/eblog?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: kakonose22
+  redis:
+    host: localhost
+    port: 6379
+  freemarker:
+    settings:
+      classic_compatible: true #处理空值
+      datetime_format: yyyy-MM-dd HH:mm
+      number_format: 0.##
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**Mapper.xml
