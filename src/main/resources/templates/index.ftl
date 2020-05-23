@@ -1,7 +1,6 @@
 <#include "/inc/layout.ftl" />
 
 <@layout "首页">
-
     <#include "/inc/header-panel.ftl" />
 
     <div class="layui-container">

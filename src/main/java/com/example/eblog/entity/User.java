@@ -2,9 +2,14 @@ package com.example.eblog.entity;
 
 import com.example.eblog.entity.BaseEntity;
 import java.time.LocalDateTime;
+import java.util.Date;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -24,16 +29,20 @@ public class User extends BaseEntity {
     /**
      * 昵称
      */
+//    @Email
+    @NotNull(message = "邮箱不能为空")
     private String username;
 
     /**
      * 密码
      */
+    @NotNull(message = "密码不能为空")
     private String password;
 
     /**
      * 邮件
      */
+    @NotNull(message = "用户名不能为空")
     private String email;
 
     /**
@@ -89,7 +98,5 @@ public class User extends BaseEntity {
     /**
      * 最后的登陆时间
      */
-    private LocalDateTime lasted;
-
-
+    private Date lasted;
 }
