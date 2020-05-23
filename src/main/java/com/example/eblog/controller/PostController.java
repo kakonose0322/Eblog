@@ -4,7 +4,9 @@ import cn.hutool.core.map.MapUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.eblog.common.lang.Result;
+import com.example.eblog.config.RabbitConfig;
 import com.example.eblog.entity.*;
+import com.example.eblog.search.mq.PostMqIndexMessage;
 import com.example.eblog.utils.ValidationUtil;
 import com.example.eblog.vo.CommentVo;
 import com.example.eblog.vo.PostVo;
@@ -140,8 +142,8 @@ public class PostController extends BaseController {
             postService.updateById(tempPost);
         }
         // 通知消息给mq，告知更新或添加
-//        amqpTemplate.convertAndSend(RabbitConfig.es_exchage, RabbitConfig.es_bind_key,
-//                new PostMqIndexMessage(post.getId(), PostMqIndexMessage.CREATE_OR_UPDATE));
+        amqpTemplate.convertAndSend(RabbitConfig.es_exchage, RabbitConfig.es_bind_key,
+                new PostMqIndexMessage(post.getId(), PostMqIndexMessage.CREATE_OR_UPDATE));
         return Result.success().action("/post/" + post.getId());
     }
 
@@ -156,9 +158,8 @@ public class PostController extends BaseController {
         // 删除相关消息、收藏等
         messageService.removeByMap(MapUtil.of("post_id", id));
         collectionService.removeByMap(MapUtil.of("post_id", id));
-//        amqpTemplate.convertAndSend(RabbitConfig.es_exchage, RabbitConfig.es_bind_key,
-//                new PostMqIndexMessage(post.getId(), PostMqIndexMessage.REMOVE));
-
+        amqpTemplate.convertAndSend(RabbitConfig.es_exchage, RabbitConfig.es_bind_key,
+                new PostMqIndexMessage(post.getId(), PostMqIndexMessage.REMOVE));
         return Result.success().action("/user/index");
     }
 
@@ -219,22 +220,6 @@ public class PostController extends BaseController {
             }
         }
         return Result.success().action("/post/" + post.getId());
-
-        // 作者自己评论自己文章，不需要通知
-//        if(comment.getUserId() != post.getUserId()) {
-//            UserMessage message = new UserMessage();
-//            message.setPostId(jid);
-//            message.setCommentId(comment.getId());
-//            message.setFromUserId(getProfileId());
-//            message.setToUserId(post.getUserId());
-//            message.setType(1);
-//            message.setContent(content);
-//            message.setCreated(new Date());
-//            message.setStatus(0);
-//            messageService.save(message);
-//
-//            // 即时通知作者（websocket）
-//            wsService.sendMessCountToUser(message.getToUserId());
     }
 
     @ResponseBody

@@ -18,4 +18,13 @@ public class IndexController extends BaseController {
         request.setAttribute("currentCategoryId", 0);
         return "index";
     }
+
+    @RequestMapping("/search")
+    public String search(String q) {
+        IPage pageData = searchService.search(getPage(), q);
+        request.setAttribute("q", q);
+//        request.setAttribute("pageData", "");// 假数据
+        request.setAttribute("pageData", pageData);
+        return "search";
+    }
 }

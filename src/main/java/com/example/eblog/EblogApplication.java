@@ -12,6 +12,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 //  extends WebMvcConfigurationSupport
 public class EblogApplication {
     public static void main(String[] args) {
+        // 解决es 启动报错问题
+        System.setProperty("es.set.netty.runtime.available.processors", "false");
         SpringApplication.run(EblogApplication.class, args);
         System.out.println("http://localhost:9001");
     }

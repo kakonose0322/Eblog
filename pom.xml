@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <!--<elasticsearch.version>7.0.0</elasticsearch.version>-->
     </properties>
 
     <dependencies>
@@ -101,7 +102,20 @@
             <version>0.1</version>
         </dependency>
 
-        <!-- modelmapper + beanutil 获得数据使用的 -->
+        <!-- es 不行的话推荐 6.4.3 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+            <version>2.1.1.RELEASE</version>
+        </dependency>
+
+        <!-- rabbitMQ -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <!-- bean 与 bean 之间的拷贝 -->
         <dependency>
             <groupId>org.modelmapper</groupId>
             <artifactId>modelmapper</artifactId>

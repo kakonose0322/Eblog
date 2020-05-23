@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.eblog.service.*;
 import com.example.eblog.shiro.AccountProfile;
 import org.apache.shiro.SecurityUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestUtils;
 import javax.servlet.http.HttpServletRequest;
@@ -29,10 +30,10 @@ public class BaseController {
     CategoryService categoryService;
     @Autowired
     WsService wsService;
-//    @Autowired
-//    SearchService searchService;
-//    @Autowired
-//    AmqpTemplate amqpTemplate;
+    @Autowired
+    SearchService searchService;
+    @Autowired
+    AmqpTemplate amqpTemplate;// 操纵MQ的
 //    @Autowired
 //    ChatService chatService;
 

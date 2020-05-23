@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-//@RequestMapping("/admin")
+@RequestMapping("/admin")
 public class AdminController extends BaseController {
     /**
      *
@@ -38,23 +38,27 @@ public class AdminController extends BaseController {
         return Result.success();
     }
 
-//    @ResponseBody
-//    @PostMapping("/initEsData")
-//    public Result initEsData() {
-//        int size = 10000;
-//        Page page = new Page();
-//        page.setSize(size);
-//        long total = 0;
-//        for (int i = 1; i < 1000; i ++) {
-//            page.setCurrent(i);
-//            IPage<PostVo> paging = postService.paging(page, null, null, null, null, null);
-//            int num = searchService.initEsData(paging.getRecords());
-//            total += num;
-//            // 当一页查不出10000条的时候，说明是最后一页了
-//            if(paging.getRecords().size() < size) {
-//                break;
-//            }
-//        }
-//        return Result.success("ES索引初始化成功，共 " + total + " 条记录！", null);
-//    }
+    // 管理员通过点击初始化es数据
+    @ResponseBody
+    @PostMapping("/initEsData")
+    public Result initEsData() {
+        // 分批次，一次一万条
+        int size = 10000;
+        Page page = new Page();
+        page.setSize(size);
+        long total = 0;
+        // 注意；这里是 1000 * 10000
+        for (int i = 1; i < 1000; i ++) {
+            page.setCurrent(i);
+            // 参数全空，搜索全部
+            IPage<PostVo> paging = postService.paging(page, null, null, null, null, null);
+            int num = searchService.initEsData(paging.getRecords());
+            total += num;
+            // 当一页查不出10000条的时候，说明是最后一页了
+            if(paging.getRecords().size() < size) {
+                break;
+            }
+        }
+        return Result.success("ES索引初始化成功，共 " + total + " 条记录！", null);
+    }
 }
