@@ -95,6 +95,13 @@
             <version>0.1</version>
         </dependency>
 
+        <!-- modelmapper + beanutil 获得数据使用的 -->
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
         <!-- lombok 依赖 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

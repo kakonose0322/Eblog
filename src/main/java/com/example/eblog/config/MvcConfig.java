@@ -1,6 +1,8 @@
 package com.example.eblog.config;
 
+
 import com.example.eblog.common.lang.Consts;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,13 +20,12 @@ public class MvcConfig implements WebMvcConfigurer {
     Consts consts;
 
     @Bean
-//    ModelMapper modelMapper() {
-//        return new ModelMapper();
-//    }
+    ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        // 告诉springmvc 注入静态文件路径：/upload/avatar/**
         registry.addResourceHandler("/upload/avatar/**")
                 .addResourceLocations("file:///" + consts.getUploadDir() + "/avatar/");
     }

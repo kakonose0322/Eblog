@@ -2,6 +2,7 @@
 
 <@layout "基本设置">
   <div class="layui-container fly-marginTop fly-user-main">
+    <!-- 侧边栏引用 -->
     <@centerLeft level=2></@centerLeft>
 
     <div class="site-tree-mobile layui-hide">

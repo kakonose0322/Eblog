@@ -34,8 +34,6 @@ public class AuthController extends BaseController {
     private static final String KAPTCHA_SESSION_KEY = "KAPTCHA_SESSION_KEY";
     @Autowired
     Producer producer;// 验证码生成工具
-    @Autowired
-    UserService userService;
 
     @GetMapping("/capthca.jpg")
     public void kaptcha(HttpServletResponse response) throws IOException {

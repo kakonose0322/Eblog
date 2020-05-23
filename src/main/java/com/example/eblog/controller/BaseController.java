@@ -1,8 +1,7 @@
 package com.example.eblog.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.eblog.service.CommentService;
-import com.example.eblog.service.PostService;
+import com.example.eblog.service.*;
 import com.example.eblog.shiro.AccountProfile;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,23 @@ public class BaseController {
     PostService postService;
     @Autowired
     CommentService commentService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    UserMessageService messageService;
+    @Autowired
+    UserCollectionService collectionService;
+    @Autowired
+    CategoryService categoryService;
+
+//    @Autowired
+//    WsService wsService;
+//    @Autowired
+//    SearchService searchService;
+//    @Autowired
+//    AmqpTemplate amqpTemplate;
+//    @Autowired
+//    ChatService chatService;
 
     // 抽取出的公共分页方法
     public Page getPage() {
