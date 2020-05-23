@@ -9,7 +9,7 @@ layui.use('layim', function(layim){
     //     ,avatar: 'http://tp1.sinaimg.cn/5619439268/180/40030060651/1'
     //     ,id: -2
     // });
-
+    // 传递jquery
     var $ = layui.jquery;
 
     layim.config({

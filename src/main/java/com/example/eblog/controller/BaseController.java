@@ -34,8 +34,8 @@ public class BaseController {
     SearchService searchService;
     @Autowired
     AmqpTemplate amqpTemplate;// 操纵MQ的
-//    @Autowired
-//    ChatService chatService;
+    @Autowired
+    ChatService chatService;
 
     // 抽取出的公共分页方法
     public Page getPage() {

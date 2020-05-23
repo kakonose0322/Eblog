@@ -122,6 +122,13 @@
             <version>1.1.0</version>
         </dependency>
 
+        <!-- tio 依赖 -->
+        <dependency>
+            <groupId>org.t-io</groupId>
+            <artifactId>tio-websocket-server</artifactId>
+            <version>3.2.5.v20190101-RELEASE</version>
+        </dependency>
+
         <!-- lombok 依赖 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

@@ -25,9 +25,12 @@ spring:
     username: guest
     password: guest
     host: localhost
-    port: 15672
+    port: 5672
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
 file:
   upload:
     dir: ${user.dir}/upload
+im:
+  server:
+    port: 9326
