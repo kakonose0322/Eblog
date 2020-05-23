@@ -6,7 +6,6 @@ import com.example.eblog.shiro.AccountProfile;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.ServletRequestUtils;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -28,9 +27,8 @@ public class BaseController {
     UserCollectionService collectionService;
     @Autowired
     CategoryService categoryService;
-
-//    @Autowired
-//    WsService wsService;
+    @Autowired
+    WsService wsService;
 //    @Autowired
 //    SearchService searchService;
 //    @Autowired

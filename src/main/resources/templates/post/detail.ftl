@@ -1,7 +1,9 @@
 <#include "/inc/layout.ftl" />
 
-<#-- 这里传入，title数据，然后替换layout标签的nested内容 -->
-<@layout "博客分类">
+<@layout "博客详情">
+
+  <#include "/inc/header-panel.ftl" />
+
   <div class="layui-container">
     <div class="layui-row layui-col-space15">
       <div class="layui-col-md8 content detail">
@@ -14,14 +16,23 @@
             <#if post.level gt 0><span class="layui-badge layui-bg-black">置顶</span></#if>
             <#if post.recommend><span class="layui-badge layui-bg-red">精帖</span></#if>
 
-            <div class="fly-admin-box" data-id="123">
-              <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
+            <div class="fly-admin-box" data-id="${post.id}">
 
-              <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span>
-              <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
+              <#if post.userId == profile.id>
+              <#--发布者删除-->
+                <span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>
+              </#if>
 
-              <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span>
-              <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
+              <@shiro.hasRole name="admin">
+              <#--管理员操作-->
+                <span class="layui-btn layui-btn-xs jie-admin" type="set" field="delete" rank="1">删除</span>
+
+                <#if post.level == 0><span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span></#if>
+                <#if post.level gt 0><span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span></#if>
+
+                <#if !post.recommend><span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span></#if>
+                <#if post.recommend><span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span></#if>
+              </@shiro.hasRole>
             </div>
             <span class="fly-list-nums">
             <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i> ${post.commentCount}</a>
@@ -66,6 +77,7 @@
                     <a href="/user/${comment.authorId}" class="fly-link">
                       <cite>${comment.authorName}</cite>
                     </a>
+
                     <#if comment.user_id == post.user_id>
                       <span>(楼主)</span>
                     </#if>
@@ -99,7 +111,7 @@
           <@paging pageData></@paging>
 
           <div class="layui-form layui-form-pane">
-            <form action="/jie/reply/" method="post">
+            <form action="/post/reply/" method="post">
               <div class="layui-form-item layui-form-text">
                 <a name="comment"></a>
                 <div class="layui-input-block">
@@ -119,5 +131,17 @@
   </div>
   <script>
     layui.cache.page = 'jie';
+
+    $(function () {
+      layui.use(['fly', 'face'], function() {
+        var fly = layui.fly;
+        $('.detail-body').each(function(){
+          var othis = $(this), html = othis.html();
+          othis.html(fly.content(html));
+        });
+      });
+    });
+
   </script>
+
 </@layout>

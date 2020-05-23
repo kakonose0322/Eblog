@@ -172,7 +172,7 @@ public class UserController extends BaseController {
             }
         }
         // 批量修改成已读
-//        messageService.updateToReaded(ids);
+        messageService.updateToReaded(ids);
         request.setAttribute("pageData", page);
         return "/user/mess";
     }

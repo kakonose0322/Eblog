@@ -8,6 +8,8 @@ import com.example.eblog.entity.UserMessage;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.eblog.vo.UserMessageVo;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -19,4 +21,8 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UserMessageMapper extends BaseMapper<UserMessage> {
     IPage<UserMessageVo> selectMessages(Page page, @Param(Constants.WRAPPER) QueryWrapper<UserMessage> wrapper);
+
+    @Transactional
+    @Update("update user_message set status = 1 ${ew.customSqlSegment}")
+    void updateToReaded(QueryWrapper<UserMessage> id);
 }

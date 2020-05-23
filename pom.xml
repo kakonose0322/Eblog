@@ -47,6 +47,12 @@
             <!--<version>1.9.22</version>-->
         <!--</dependency>-->
 
+        <!-- websocket 依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+
         <!-- 开发工具（热部署） 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
