@@ -17,13 +17,13 @@ spring:
       number_format: 0.##
   data:
     elasticsearch:
-      cluster-name: node-master
-      cluster-nodes: 127.0.0.1:9300
+      cluster-name: eblog #elasticsearch.yml 文件中的 cluster.name，不是节点名称
+      cluster-nodes: localhost:9300
       repositories:
         enabled: true
   rabbitmq:
-    username: guest
-    password: guest
+    username: admin
+    password: admin
     host: localhost
     port: 5672
 mybatis-plus:
