@@ -5,8 +5,8 @@ spring:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver
     url: jdbc:p6spy:mysql://localhost:3306/eblog?useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-    username: root
-    password: kakonose22
+    username: your account
+    password: your password
   redis:
     host: localhost
     port: 6379
